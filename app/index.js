@@ -3,7 +3,6 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { Provider } from 'react-redux';
 
 import Navigator from './config/routes'
-import Home from './screens/Home';
 
 // Constants for colors
 EStyleSheet.build({

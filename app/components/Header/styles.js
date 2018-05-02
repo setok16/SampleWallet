@@ -16,7 +16,7 @@ const styles = EstyleSheet.create({
       paddingTop: 35,
     },
     '@media android': {
-      paddingTop: StatusBar.currentHeight+5, // Android specific
+      paddingTop: StatusBar.currentHeight-10, // Android specific
     },
   },
   button: {
@@ -34,8 +34,9 @@ const styles = EstyleSheet.create({
     flex: 1,
     fontSize: 20,
     margin: 20,
+    marginTop: 20,
     color: '$lightGray',
-    alignSelf: 'center',
+    //alignSelf: 'center',
   },
 });
 

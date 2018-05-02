@@ -13,31 +13,56 @@ class Home extends Component {
     navigation: PropTypes.object,
   }
 
-  handleHeaderPress() {
+  handleMenuPress = () => {
     //TODO The side menu will create an error on press
-    console.log('Header Pressed');
-    this.props.navigation.nagivate('DrawerNavigator');
+    console.log('Menu Pressed');
+    this.props.navigation.navigate('DrawerOpen');
   }
 
-  handlePanelPress() {
+  handlePanelPress = () => {
     console.log('Panel Pressed');
+  }
+
+  handleWalletPress = () => {
+    this.props.navigation.navigate('Wallet');
+  }
+
+  handleSendPress = () => {
+    this.props.navigation.navigate('Send');
+  }
+
+  handleReceivePress = () => {
+    this.props.navigation.navigate('Receive');
+  }
+
+  handleTransactionsPress= () => {
+    this.props.navigation.navigate('Transactions');
+  }
+
+  handleSettingsPress = () => {
+    this.props.navigation.navigate('Settings');
   }
 
   render() {
     return (
       <Container>
         <StatusBar translucent={false} barStyle="light-content" />
-        <Header onPress={this.handleHeaderPress} headerText='MY ADA WALLET'/>
+        <Header onPress={this.handleMenuPress} headerText='MY ADA WALLET'/>
         <ScrollView style={{position:'absolute', top:100, bottom:-100, paddingTop: 20}}>
-          <Panel onPress={this.handlePanelPress} mainText='Wallet' subText='0.0000000A' />
-          <Panel onPress={this.handlePanelPress} mainText='Send' subText='Select to send' />
-          <Panel onPress={this.handlePanelPress} mainText='Receive' subText='Select to receive' />
-          <Panel onPress={this.handlePanelPress} mainText='Transactions' subText='View your transactions' />
-          <Panel onPress={this.handlePanelPress} mainText='Settings' subText='Change app and wallet settings' />
+          <Panel onPress={this.handleWalletPress} mainText='Wallet' subText='0.0000000A' />
+          <Panel onPress={this.handleSendPress} mainText='Send' subText='Select to send' />
+          <Panel onPress={this.handleReceivePress} mainText='Receive' subText='Select to receive' />
+          <Panel onPress={this.handleTransactionsPress} mainText='Transactions' subText='View your transactions' />
+          <Panel onPress={this.handleSettingsPress} mainText='Settings' subText='Change app and wallet settings' />
         </ScrollView>
+
       </Container>
     );
   }
+}
+
+const mapStateToProps = (state) => {
+
 }
 
 export default Home;
