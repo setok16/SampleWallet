@@ -4,24 +4,26 @@ import { StatusBar } from 'react-native';
 
 const styles = EstyleSheet.create({
   container: {
-    backgroundColor: '$darkGray',
+    backgroundColor: '$gray',
+    alignItems: 'center',
     //flex: 1,
     flexDirection: 'row',
     left: 0,
     right: 0,
     top: 0,
     bottom: 0,
-    height: 120,
+    height: 100,
+    /* // TopBar component takes care of status bar difference
     '@media ios': {
       paddingTop: 35,
     },
     '@media android': {
-      paddingTop: StatusBar.currentHeight-10, // Android specific
-    },
+      paddingTop: StatusBar.currentHeight, // Android specific
+    },*/
   },
   button: {
     //position: 'absolute',
-    alignSelf: 'flex-start',
+    //alignSelf: 'flex-start',
     flex: 0.4,
   },
   menu: {

@@ -12,9 +12,10 @@ EStyleSheet.build({
   $primaryPurple: '#9E768F',
   $white: '#FFF',
   $border: '#E2E2E2',
-  $inputText: '#797979',
+  $gray: '#4D4D4D',
   $lightGray: '#F0F0F0',
   $darkGray: '#343434',
+  $black: '#000',
 });
 
 export default () => (

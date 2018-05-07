@@ -9,11 +9,11 @@ export default EStyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     height: 80,
+    marginTop: 10,
     //flex: 1,
   },
   container: {
     backgroundColor: '$darkGray',
-    marginTop: 10,
     marginBottom: 10,
     borderRadius: 10,
     alignSelf: 'stretch',

@@ -5,6 +5,7 @@ import { DrawerNavigator } from 'react-navigation';
 
 import { Container } from '../components/Container';
 import { Header } from '../components/Header';
+import { TopBar } from '../components/TopBar';
 import { Panel } from '../components/Panel';
 
 class Home extends Component {
@@ -46,9 +47,10 @@ class Home extends Component {
   render() {
     return (
       <Container>
+        <TopBar/>
         <StatusBar translucent={false} barStyle="light-content" />
         <Header onPress={this.handleMenuPress} headerText='MY ADA WALLET'/>
-        <ScrollView style={{flex: 1, paddingTop: 20, flexDirection: 'column'}}>
+        <ScrollView style={{flex: 1, paddingTop: 10, flexDirection: 'column'}}>
           <View style={{justifyContent:'center', flexDirection: 'column'}}>
             <Panel onPress={this.handleWalletPress} mainText='Wallet' subText='0.0000000A' />
             <Panel onPress={this.handleSendPress} mainText='Send' subText='Select to send' />
@@ -56,7 +58,7 @@ class Home extends Component {
             <Panel onPress={this.handleTransactionsPress} mainText='Transactions' subText='View your transactions' />
             <Panel onPress={this.handleSettingsPress} mainText='Settings' subText='Change app and wallet settings' />
             <Text style={{padding: 25, color:'#FFF'}}>
-              This application and its content is copyright of [business name] - © [business name] 2018. 
+              This application and its content is copyright of BUSINESS - © BUSINESS 2018.
               {"\n"}
               All rights reserved.
             </Text>
