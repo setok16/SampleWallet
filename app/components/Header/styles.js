@@ -5,13 +5,13 @@ import { StatusBar } from 'react-native';
 const styles = EstyleSheet.create({
   container: {
     backgroundColor: '$darkGray',
-    flex: 1,
+    //flex: 1,
     flexDirection: 'row',
     left: 0,
     right: 0,
     top: 0,
     bottom: 0,
-    height: 100,
+    height: 120,
     '@media ios': {
       paddingTop: 35,
     },

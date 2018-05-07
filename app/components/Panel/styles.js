@@ -1,16 +1,23 @@
 import { Dimensions } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-const imageWidth = Dimensions.get('window').width / 2;
+//const imageWidth = Dimensions.get('window').width / 2;
 
 export default EStyleSheet.create({
+  wrapper: {
+    flexDirection: 'column',
+    paddingLeft: 20,
+    paddingRight: 20,
+    height: 80,
+    //flex: 1,
+  },
   container: {
     backgroundColor: '$darkGray',
     marginTop: 10,
     marginBottom: 10,
     borderRadius: 10,
-    //flex: 0.1,
     alignSelf: 'stretch',
+    height: 70,
   },
   subContainer: {
     paddingTop: 10,
@@ -18,10 +25,9 @@ export default EStyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     flexDirection: 'row',
-    justifyContent: 'center',
+    //justifyContent: 'center', // Can also be 'center'
   },
   icon: {
-    //flex: 0.2,
     height: null,
     width: 30,
     resizeMode: 'contain',

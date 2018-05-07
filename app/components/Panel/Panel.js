@@ -7,6 +7,7 @@ import styles from './styles';
 const Panel = (props) => {
   const { onPress, mainText, subText } = props;
 
+  // Statically set imageSource, since require() cannot be set dynamically
   let imageSource = '';
   if (mainText === 'Wallet') {
     imageSource = require('./images/wallet.png');
@@ -21,15 +22,17 @@ const Panel = (props) => {
   }
 
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
-      <View style={styles.subContainer}>
-        <Image source={imageSource} style={styles.icon}/>
-        <View style={styles.textContainer}>
-          <Text style={styles.mainText}>{mainText}</Text>
-          <Text style={styles.subText}>{subText}</Text>
+    <View style={styles.wrapper}>
+      <TouchableOpacity style={styles.container} onPress={onPress}>
+        <View style={styles.subContainer}>
+          <Image source={imageSource} style={styles.icon}/>
+          <View style={styles.textContainer}>
+            <Text style={styles.mainText}>{mainText}</Text>
+            <Text style={styles.subText}>{subText}</Text>
+          </View>
         </View>
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </View>
   );
 };
 

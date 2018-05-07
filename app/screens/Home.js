@@ -16,7 +16,7 @@ class Home extends Component {
   handleMenuPress = () => {
     //TODO The side menu will create an error on press
     console.log('Menu Pressed');
-    this.props.navigation.navigate('DrawerOpen');
+    this.props.navigation.navigate('DrawerToggle');
   }
 
   handlePanelPress = () => {
@@ -35,7 +35,7 @@ class Home extends Component {
     this.props.navigation.navigate('Receive');
   }
 
-  handleTransactionsPress= () => {
+  handleTransactionsPress = () => {
     this.props.navigation.navigate('Transactions');
   }
 
@@ -48,14 +48,20 @@ class Home extends Component {
       <Container>
         <StatusBar translucent={false} barStyle="light-content" />
         <Header onPress={this.handleMenuPress} headerText='MY ADA WALLET'/>
-        <ScrollView style={{position:'absolute', top:100, bottom:-100, paddingTop: 20}}>
-          <Panel onPress={this.handleWalletPress} mainText='Wallet' subText='0.0000000A' />
-          <Panel onPress={this.handleSendPress} mainText='Send' subText='Select to send' />
-          <Panel onPress={this.handleReceivePress} mainText='Receive' subText='Select to receive' />
-          <Panel onPress={this.handleTransactionsPress} mainText='Transactions' subText='View your transactions' />
-          <Panel onPress={this.handleSettingsPress} mainText='Settings' subText='Change app and wallet settings' />
+        <ScrollView style={{flex: 1, paddingTop: 20, flexDirection: 'column'}}>
+          <View style={{justifyContent:'center', flexDirection: 'column'}}>
+            <Panel onPress={this.handleWalletPress} mainText='Wallet' subText='0.0000000A' />
+            <Panel onPress={this.handleSendPress} mainText='Send' subText='Select to send' />
+            <Panel onPress={this.handleReceivePress} mainText='Receive' subText='Select to receive' />
+            <Panel onPress={this.handleTransactionsPress} mainText='Transactions' subText='View your transactions' />
+            <Panel onPress={this.handleSettingsPress} mainText='Settings' subText='Change app and wallet settings' />
+            <Text style={{padding: 25, color:'#FFF'}}>
+              This application and its content is copyright of [business name] - © [business name] 2018. 
+              {"\n"}
+              All rights reserved.
+            </Text>
+          </View>
         </ScrollView>
-
       </Container>
     );
   }
