@@ -5,7 +5,6 @@ import { DrawerNavigator } from 'react-navigation';
 
 import { Container } from '../components/Container';
 import { Header } from '../components/Header';
-import { TopBar } from '../components/TopBar';
 import { Panel } from '../components/Panel';
 
 class Home extends Component {
@@ -47,7 +46,6 @@ class Home extends Component {
   render() {
     return (
       <Container>
-        <TopBar/>
         <StatusBar translucent={false} barStyle="light-content" />
         <Header onPress={this.handleMenuPress} headerText='MY ADA WALLET'/>
         <ScrollView style={{flex: 1, paddingTop: 10, flexDirection: 'column'}}>

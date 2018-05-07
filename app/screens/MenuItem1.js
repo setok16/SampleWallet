@@ -5,6 +5,7 @@ import { DrawerNavigator } from 'react-navigation';
 
 import { Container } from '../components/Container';
 import { Header } from '../components/Header';
+import { TopBar } from '../components/TopBar';
 
 class MenuItem1 extends Component {
 
