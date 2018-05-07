@@ -14,7 +14,6 @@ class Home extends Component {
   }
 
   handleMenuPress = () => {
-    //TODO The side menu will create an error on press
     console.log('Menu Pressed');
     this.props.navigation.navigate('DrawerToggle');
   }

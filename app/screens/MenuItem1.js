@@ -19,7 +19,7 @@ class MenuItem1 extends Component {
     return (
       <Container>
         <StatusBar translucent={false} barStyle="light-content" />
-        <Header onPress={this.handleMenuPress} headerText='MY ADA WALLET'/>
+        <Header onPress={this.handleMenuPress} headerText='MENU ITEM 1'/>
         <ScrollView style={{position:'absolute', top:100, bottom:-100, paddingTop: 20}}>
           <Text>Demo Menu Item page</Text>
         </ScrollView>

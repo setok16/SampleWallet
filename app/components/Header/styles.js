@@ -13,7 +13,9 @@ const styles = EstyleSheet.create({
     top: 0,
     bottom: 0,
     height: 100,
-    /* // TopBar component takes care of status bar difference
+    /*
+    // TopBar component takes care of status bar difference
+    // and colors the status bar black.
     '@media ios': {
       paddingTop: 35,
     },
@@ -24,21 +26,21 @@ const styles = EstyleSheet.create({
   button: {
     //position: 'absolute',
     //alignSelf: 'flex-start',
-    flex: 0.4,
+    flex: 0.15,
   },
   menu: {
     margin: 20,
-    width: 25,
+    width: 30,
     height: 25,
     tintColor: '$lightGray',
   },
   text: {
-    flex: 1,
+    flex: 0.85,
     fontSize: 20,
     margin: 20,
     marginTop: 20,
     color: '$lightGray',
-    //alignSelf: 'center',
+    alignSelf: 'center',
   },
 });
 
