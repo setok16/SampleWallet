@@ -5,13 +5,13 @@ import { View, TouchableOpacity, Text, Image } from 'react-native';
 import styles from './styles';
 
 const Panel = (props) => {
-  const { type, onPress, mainText, subText, upperText } = props;
+  const { type, onPress, mainText, subText, upperText, disabled } = props;
 
   // Statically set imageSource, since require() cannot be set dynamically
   let imageSource = '';
 
   switch (type) {
-    case 'home': { // For panels used in home screen only
+    case 'home': { // For panels used in Home screen only
       if (mainText === 'Wallet') {
         imageSource = require('./images/wallet.png');
       } else if (mainText === 'Send') {
@@ -25,7 +25,7 @@ const Panel = (props) => {
       }
       break;
     }
-    case 'wallet': { // For panels used in wallet screen only
+    case 'transactions': { // For panels used in Transactions screen only
       if (mainText === 'Sent') {
         imageSource = require('./images/send.png');
       } else if (mainText === 'Received') {
@@ -38,7 +38,7 @@ const Panel = (props) => {
 
   return (
     <View style={styles.wrapper}>
-      <TouchableOpacity style={styles.container} onPress={onPress}>
+      <TouchableOpacity style={styles.container} activeOpacity={disabled ? 1 : 0} onPress={onPress}>
         <View style={styles.subContainer}>
           <Image source={imageSource} style={styles.icon}/>
           <View style={styles.textContainer}>
@@ -60,6 +60,7 @@ Panel.propTypes = {
   mainText: PropTypes.string,
   subText: PropTypes.string,
   upperText: PropTypes.string,
+  disabled: PropTypes.bool, // Sets active opacity to 1 if true
 }
 
 export default Panel;

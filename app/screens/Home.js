@@ -7,11 +7,34 @@ import { Container } from '../components/Container';
 import { TopBar } from '../components/TopBar';
 import { Header } from '../components/Header';
 import { Panel } from '../components/Panel';
+import { BigPanel } from '../components/BigPanel';
+// Hard-coded transaction data
+import transactions from '../data/transactions';
 
 class Home extends Component {
 
   static propTypes = {
     navigation: PropTypes.object,
+  }
+
+  // Temp code for calculating hard-coded transactions
+  calculateBalance = (arr) => {
+    let balance = 0;
+    for (i = 0; i < arr.length; i++) {
+      if (arr[i].type =='Received')
+        balance += arr[i].amount;
+      else
+        balance -= arr[i].amount;
+    }
+    return balance;
+  }
+
+  calculateNumTransactions = (arr) => {
+    let num = 0;
+    for (i = 0; i < arr.length; i++) {
+      num++;
+    }
+    return num;
   }
 
   handleMenuPress = () => {
@@ -26,7 +49,8 @@ class Home extends Component {
   */
 
   handleWalletPress = () => {
-    this.props.navigation.navigate('Wallet');
+    //this.props.navigation.navigate('Wallet');
+    console.log(this.calculateBalance(transactions));
   }
 
   handleSendPress = () => {
@@ -53,7 +77,13 @@ class Home extends Component {
         <Header onPress={this.handleMenuPress} headerText='MY ADA WALLET'/>
         <ScrollView style={{flex: 1, paddingTop: 10, flexDirection: 'column'}}>
           <View style={{justifyContent:'center', flexDirection: 'column'}}>
-            <Panel type='home' onPress={this.handleWalletPress} mainText='Wallet' subText='0.0000000 ₳' />
+            <BigPanel
+              type='home'
+              onPress={this.handleWalletPress}
+              mainText='Wallet'
+              subText={this.calculateBalance(transactions).toFixed(7).toString()+' ₳'}
+              upperText={'Transactions: ' + this.calculateNumTransactions(transactions).toString()}
+            />
             <Panel type='home' onPress={this.handleSendPress} mainText='Send' subText='Select to send' />
             <Panel type='home' onPress={this.handleReceivePress} mainText='Receive' subText='Select to receive' />
             <Panel type='home' onPress={this.handleTransactionsPress} mainText='Transactions' subText='View your transactions' />

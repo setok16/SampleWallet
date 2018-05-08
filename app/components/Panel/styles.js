@@ -43,7 +43,7 @@ export default EStyleSheet.create({
     flexDirection: 'row',
   },
   mainText: {
-    flex: 0.6,
+    flex: 0.7,
     color: '$white',
     fontWeight: '200',
     fontSize: 20,
@@ -54,7 +54,7 @@ export default EStyleSheet.create({
     fontSize: 15,
   },
   upperText: {
-    flex: 0.4,
+    flex: 0.3,
     alignSelf: 'center',
     color: '$white',
     fontWeight: '200',
