@@ -10,7 +10,6 @@ import { TopBar } from '../components/TopBar';
 class MenuItem1 extends Component {
 
   handleMenuPress = () => {
-    //TODO The side menu will create an error on press
     console.log('Menu Pressed');
     this.props.navigation.navigate('DrawerOpen');
   }
@@ -18,6 +17,7 @@ class MenuItem1 extends Component {
   render() {
     return (
       <Container>
+        <TopBar />
         <StatusBar translucent={false} barStyle="light-content" />
         <Header onPress={this.handleMenuPress} headerText='MENU ITEM 1'/>
         <ScrollView style={{position:'absolute', top:100, bottom:-100, paddingTop: 20}}>

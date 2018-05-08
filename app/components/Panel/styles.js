@@ -37,8 +37,13 @@ export default EStyleSheet.create({
   textContainer: {
     flex: 1,
     paddingLeft: 20,
+    flexDirection: 'column',
+  },
+  upperContainer: {
+    flexDirection: 'row',
   },
   mainText: {
+    flex: 0.6,
     color: '$white',
     fontWeight: '200',
     fontSize: 20,
@@ -48,4 +53,11 @@ export default EStyleSheet.create({
     fontWeight: '200',
     fontSize: 15,
   },
+  upperText: {
+    flex: 0.4,
+    alignSelf: 'center',
+    color: '$white',
+    fontWeight: '200',
+    fontSize: 10,
+  }
 });

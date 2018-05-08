@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, TouchableWithoutFeedback, Keyboard } from 'react-native';
-import { TopBar } from '../TopBar';
 import { ifIphoneX } from 'react-native-iphone-x-helper';
 
 import styles from './styles';
@@ -14,7 +13,6 @@ const Container = ( { children, backgroundColor } ) => {
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={containerStyles}>
-        <TopBar/>
         {children}
       </View>
     </TouchableWithoutFeedback>
