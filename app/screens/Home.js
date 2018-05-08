@@ -53,8 +53,8 @@ class Home extends Component {
             <Panel onPress={this.handleSendPress} mainText='Send' subText='Select to send' />
             <Panel onPress={this.handleReceivePress} mainText='Receive' subText='Select to receive' />
             <Panel onPress={this.handleTransactionsPress} mainText='Transactions' subText='View your transactions' />
-            <Panel onPress={this.handleSettingsPress} mainText='Settings' subText='Change app and wallet settings' />
-            <Text style={{padding: 25, color:'#FFF'}}>
+            <Panel onPress={this.handleSettingsPress} mainText='Settings' subText='Change settings' />
+            <Text style={{padding: 25, color:'#FFF', fontWeight:'200'}}>
               This application and its content is copyright of BUSINESS - © BUSINESS 2018.
               {"\n"}
               All rights reserved.

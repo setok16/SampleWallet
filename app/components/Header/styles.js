@@ -36,6 +36,7 @@ const styles = EstyleSheet.create({
   },
   text: {
     flex: 0.85,
+    fontWeight: '300',
     fontSize: 20,
     margin: 20,
     marginTop: 20,

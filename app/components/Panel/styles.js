@@ -8,7 +8,7 @@ export default EStyleSheet.create({
     flexDirection: 'column',
     paddingLeft: 20,
     paddingRight: 20,
-    height: 80,
+    height: 70,
     marginTop: 10,
     //flex: 1,
   },
@@ -17,7 +17,8 @@ export default EStyleSheet.create({
     marginBottom: 10,
     borderRadius: 10,
     alignSelf: 'stretch',
-    height: 70,
+    //height: 70,
+    height: 65,
   },
   subContainer: {
     paddingTop: 10,
@@ -39,10 +40,12 @@ export default EStyleSheet.create({
   },
   mainText: {
     color: '$white',
+    fontWeight: '200',
     fontSize: 20,
   },
   subText: {
     color: '$white',
+    fontWeight: '200',
     fontSize: 15,
   },
 });
