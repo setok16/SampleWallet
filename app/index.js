@@ -14,6 +14,7 @@ EStyleSheet.build({
   $border: '#E2E2E2',
   $gray: '#4D4D4D',
   $lightGray: '#F0F0F0',
+  $nonPressableGray: '#404040',
   $darkGray: '#343434',
   $black: '#000',
 });

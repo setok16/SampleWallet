@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Text, View, StatusBar, ScrollView } from 'react-native';
 import { DrawerNavigator } from 'react-navigation';
+import Moment from 'moment';
 
 import { Container } from '../components/Container';
 import { TopBar } from '../components/TopBar';
@@ -37,6 +38,10 @@ class Home extends Component {
     return num;
   }
 
+  getLastTransactionDate = (arr) => {
+    return Moment(arr[0].date.toString()).format('YYYY/MM/DD HH:mm');
+  }
+
   handleMenuPress = () => {
     console.log('Menu Pressed');
     this.props.navigation.navigate('DrawerToggle');
@@ -50,7 +55,6 @@ class Home extends Component {
 
   handleWalletPress = () => {
     //this.props.navigation.navigate('Wallet');
-    console.log(this.calculateBalance(transactions));
   }
 
   handleSendPress = () => {
@@ -82,9 +86,11 @@ class Home extends Component {
               onPress={this.handleWalletPress}
               mainText='Wallet'
               subText={this.calculateBalance(transactions).toFixed(7).toString()+' ₳'}
-              upperText={'Transactions: ' + this.calculateNumTransactions(transactions).toString()}
+              smallText1={'Total Transactions:\t' + this.calculateNumTransactions(transactions).toString()}
+              smallText2={'Latest Transaction:\t' + this.getLastTransactionDate(transactions).toString()}
+              disabled={true}
             />
-            <Panel type='home' onPress={this.handleSendPress} mainText='Send' subText='Select to send' />
+          <Panel type='home' onPress={this.handleSendPress} mainText='Send' subText='Select to send' />
             <Panel type='home' onPress={this.handleReceivePress} mainText='Receive' subText='Select to receive' />
             <Panel type='home' onPress={this.handleTransactionsPress} mainText='Transactions' subText='View your transactions' />
             <Panel type='home' onPress={this.handleSettingsPress} mainText='Settings' subText='Change settings' />

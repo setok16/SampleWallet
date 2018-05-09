@@ -6,7 +6,7 @@ export default [
   {
     type: SENT,
     amount: 1.2345678,
-    date: '2018-05-08T02:03:33.311Z',
+    date: '2018-05-08T14:03:33.311Z',
   },
   {
     type: RECEIVED,

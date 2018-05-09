@@ -38,7 +38,7 @@ const Panel = (props) => {
 
   return (
     <View style={styles.wrapper}>
-      <TouchableOpacity style={styles.container} activeOpacity={disabled ? 1 : 0} onPress={onPress}>
+      <TouchableOpacity style={disabled ? styles.disabledContainer : styles.container} activeOpacity={disabled ? 1 : 0} onPress={onPress}>
         <View style={styles.subContainer}>
           <Image source={imageSource} style={styles.icon}/>
           <View style={styles.textContainer}>
