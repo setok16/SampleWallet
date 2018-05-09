@@ -24,6 +24,7 @@ class Transactions extends Component {
             />
           )}
           keyExtractor={(item, index) => index.toString()}
+          style={{paddingTop:10}}
         >
         </FlatList>
       </Container>

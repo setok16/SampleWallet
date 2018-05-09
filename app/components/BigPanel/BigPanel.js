@@ -19,9 +19,14 @@ const BigPanel = (props) => {
 
   imageSource = require('./images/wallet.png');
 
+  const containerStyles = [styles.container];
+  if (disabled) {
+    containerStyles.push(styles.disabledContainer);
+  }
+
   return (
     <View style={styles.wrapper}>
-      <TouchableOpacity style={disabled?styles.disabledContainer:styles.container} onPress={onPress} activeOpacity={disabled ? 1 : 0}>
+      <TouchableOpacity style={containerStyles} onPress={onPress} activeOpacity={disabled ? 1 : 0}>
         <View style={styles.subContainer}>
           <Image source={imageSource} style={styles.icon}/>
           <View style={styles.textContainer}>

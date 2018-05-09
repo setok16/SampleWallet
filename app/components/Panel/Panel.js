@@ -33,12 +33,20 @@ const Panel = (props) => {
       }
       break;
     }
+    case 'send': { // For panels used in Send screen only
+      imageSource = require('./images/wallet.png');
+
+    }
   }
 
+  const containerStyles = [styles.container];
+  if (disabled) {
+    containerStyles.push(styles.disabledContainer);
+  }
 
   return (
     <View style={styles.wrapper}>
-      <TouchableOpacity style={disabled ? styles.disabledContainer : styles.container} activeOpacity={disabled ? 1 : 0} onPress={onPress}>
+      <TouchableOpacity style={containerStyles} activeOpacity={disabled ? 1 : 0} onPress={onPress}>
         <View style={styles.subContainer}>
           <Image source={imageSource} style={styles.icon}/>
           <View style={styles.textContainer}>

@@ -18,15 +18,11 @@ export default EStyleSheet.create({
     borderRadius: 10,
     alignSelf: 'stretch',
     height: 100,
+    borderWidth: 1,
+    borderColor: '$border',
   },
   disabledContainer: {
     backgroundColor: '$nonPressableGray',
-    marginBottom: 10,
-    borderRadius: 10,
-    alignSelf: 'stretch',
-    height: 100,
-    borderWidth: 1,
-    borderColor: '$white',
   },
   subContainer: {
     paddingTop: 10,
