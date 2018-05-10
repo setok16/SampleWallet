@@ -45,6 +45,7 @@ class Send extends Component {
   handleButtonPress = () => {
     console.log('Button Pressed!')
     console.log('Receiver: '+this.state.receiver+'\nAmount: '+this.state.totalAmount);
+    // Makes the modal pop up
     this.setModalVisible(true);
   }
 
@@ -131,6 +132,8 @@ class Send extends Component {
   }
 }
 
+export default Send;
+
 const styles = EStyleSheet.create({
   text: {
     color: '$white',
@@ -154,5 +157,3 @@ const styles = EStyleSheet.create({
     padding: 5,
   },
 });
-
-export default Send;

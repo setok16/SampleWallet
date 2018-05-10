@@ -17,9 +17,9 @@ export default EStyleSheet.create({
     borderRadius: 10,
     alignSelf: 'stretch',
     borderWidth: 1,
-    borderColor: '$border',
+    borderColor: '$darkGray',
   },
   modalContainer: {
-    backgroundColor: '$primaryRed',
+    backgroundColor: '$white',
   },
 });

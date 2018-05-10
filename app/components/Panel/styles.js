@@ -22,6 +22,7 @@ export default EStyleSheet.create({
   },
   disabledContainer: {
     backgroundColor: '$nonPressableGray',
+    borderColor: '$darkGray',
   },
   subContainer: {
     paddingTop: 10,
