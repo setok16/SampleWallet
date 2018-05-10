@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, Image, View, StatusBar, ScrollView, Clipboard, TextInput, Alert } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import QRCode from 'react-native-qrcode';
+import { connect } from 'react-redux';
 
 import { Container } from '../components/Container';
 import { Panel } from '../components/Panel';
@@ -10,18 +11,16 @@ import { Button } from '../components/Button';
 // Hard-coded account data
 import addresses from '../data/addresses';
 
+import { getNewAddress } from '../actions/wallet';
+
 class Receive extends Component {
 
   constructor (props) {
     super(props);
-    this.state = {
-      addressIndex: 0,
-      address: addresses[0],
-    }
   }
 
   handleClipboardButton = () => {
-    Clipboard.setString(this.state.address);
+    Clipboard.setString(this.props.address);
     Alert.alert(
       'Copied',
       'Address copied to clipboard',
@@ -33,10 +32,7 @@ class Receive extends Component {
   }
 
   handleAddressChange = () => {
-    // TODO: This is temporary for mock. This stupid logic must change
-    const index = this.state.addressIndex ? 0 : 1;
-    this.setState({addressIndex: this.state.addressIndex ? 0 : 1});
-    this.setState({address: addresses[index]});
+    this.props.dispatch(getNewAddress());
   }
 
   render() {
@@ -47,11 +43,11 @@ class Receive extends Component {
           <SubContainer>
             <Text style={styles.text}>Your wallet address:</Text>
             <View style={{left:-15}}>
-              <Button text={this.state.address} onPress={this.handleClipboardButton}/>
+              <Button text={this.props.address} onPress={this.handleClipboardButton}/>
             </View>
             <View style={{paddingBottom:10}}>
               <QRCode
-                value={this.state.address}
+                value={this.props.address}
                 size={150}
                 bgColor='black'
                 fgColor='white'
@@ -78,7 +74,15 @@ class Receive extends Component {
   }
 }
 
-export default Receive;
+
+const mapStateToProps = (state) => {
+  const address = state.addresses.address;
+  return {
+    address,
+  };
+};
+
+export default connect(mapStateToProps)(Receive);
 
 const styles = EStyleSheet.create({
   text: {

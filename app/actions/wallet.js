@@ -9,3 +9,7 @@ export const calculateNumTransactions = () => ({
 export const getLastTransactionDate = () => ({
   type: 'GET_LAST_TRANSACTION_DATE',
 });
+
+export const getNewAddress = () => ({
+  type: 'GET_NEW_ADDRESS',
+});

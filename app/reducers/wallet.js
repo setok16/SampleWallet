@@ -1,7 +1,7 @@
 //import { calculateBalance, calculateNumTransactions, getLastTransactionDate  } from '../actions/wallet';
 import Moment from 'moment';
 
-// Only getting sample data for now. This must change significantly
+// Only getting sample data for now. This must change once we start using APIs
 import transactions from '../data/transactions';
 
 const initialState = {
