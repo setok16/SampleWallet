@@ -23,8 +23,8 @@ class Receive extends Component {
   handleClipboardButton = () => {
     Clipboard.setString(this.state.address);
     Alert.alert(
-      'Notice',
-      'Copied to clipboard',
+      'Copied',
+      'Address copied to clipboard',
       [
         { text: 'Ok' }
       ],

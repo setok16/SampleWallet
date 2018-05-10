@@ -3,43 +3,28 @@ import PropTypes from 'prop-types';
 import { Text, View, StatusBar, ScrollView } from 'react-native';
 import { DrawerNavigator } from 'react-navigation';
 import Moment from 'moment';
+import { connect } from 'react-redux';
 
 import { Container } from '../components/Container';
 import { TopBar } from '../components/TopBar';
 import { Header } from '../components/Header';
 import { Panel } from '../components/Panel';
 import { BigPanel } from '../components/BigPanel';
-// Hard-coded transaction data
-import transactions from '../data/transactions';
+
+import { calculateBalance, calculateNumTransactions, getLastTransactionDate } from '../actions/wallet';
 
 class Home extends Component {
 
   static propTypes = {
     navigation: PropTypes.object,
+    dispatch: PropTypes.func,
   }
 
-  // Temp code for calculating hard-coded transactions
-  calculateBalance = (arr) => {
-    let balance = 0;
-    for (i = 0; i < arr.length; i++) {
-      if (arr[i].type =='Received')
-        balance += arr[i].amount;
-      else
-        balance -= arr[i].amount;
-    }
-    return balance;
-  }
-
-  calculateNumTransactions = (arr) => {
-    let num = 0;
-    for (i = 0; i < arr.length; i++) {
-      num++;
-    }
-    return num;
-  }
-
-  getLastTransactionDate = (arr) => {
-    return Moment(arr[0].date.toString()).format('YYYY/MM/DD HH:mm');
+  componentWillMount() {
+    // Building props (Must be attached from store to this.props)
+    this.props.dispatch(calculateBalance());
+    this.props.dispatch(calculateNumTransactions());
+    this.props.dispatch(getLastTransactionDate());
   }
 
   handleMenuPress = () => {
@@ -47,14 +32,9 @@ class Home extends Component {
     this.props.navigation.navigate('DrawerToggle');
   }
 
-  /* // No longer needed... I think
-  handlePanelPress = () => {
-    console.log('Panel Pressed');
-  }
-  */
-
   handleWalletPress = () => {
-    //this.props.navigation.navigate('Wallet');
+    // Button still active and logs this.props
+    console.log(this.props);
   }
 
   handleSendPress = () => {
@@ -85,9 +65,9 @@ class Home extends Component {
               type='home'
               onPress={this.handleWalletPress}
               mainText='Wallet'
-              subText={this.calculateBalance(transactions).toFixed(7).toString()+' ₳'}
-              smallText1={'Total Transactions:\t' + this.calculateNumTransactions(transactions).toString()}
-              smallText2={'Latest Transaction:\t' + this.getLastTransactionDate(transactions).toString()}
+              subText={this.props.balance+' ₳'}
+              smallText1={'Total Transactions:\t' + this.props.numTransactions}
+              smallText2={'Latest Transaction:\t' + this.props.lastTransactionDate}
               disabled={true}
             />
           <Panel type='home' onPress={this.handleSendPress} mainText='Send' subText='Select to send' />
@@ -106,8 +86,16 @@ class Home extends Component {
   }
 }
 
+// Allows us to use information from store in this component
 const mapStateToProps = (state) => {
+  const balance = state.wallet.balance;
+  const numTransactions = state.wallet.numTransactions;
+  const lastTransactionDate = state.wallet.lastTransactionDate;
+  return {
+    balance,
+    numTransactions,
+    lastTransactionDate,
+  };
+};
 
-}
-
-export default Home;
+export default connect(mapStateToProps)(Home);

@@ -2,8 +2,10 @@ import React from 'react';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { Provider } from 'react-redux';
 
-import Navigator from './config/routes'
-//import Send from './screens/Send';
+import Navigator from './config/routes';
+import store from './config/store';
+
+import './reducers';
 
 // Constants for colors
 EStyleSheet.build({
@@ -22,6 +24,7 @@ EStyleSheet.build({
 });
 
 export default () => (
-  <Navigator />
+  <Provider store={store}>
+    <Navigator onNavigationStateChange={null}/>
+  </Provider>
 )
-//export default Send;

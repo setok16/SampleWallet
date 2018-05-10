@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Text, View, StatusBar, ScrollView, TextInput, Modal, TouchableHighlight } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { connect } from 'react-redux';
 
 import { Container } from '../components/Container';
 import { Panel } from '../components/Panel';
@@ -9,7 +11,13 @@ import { Button } from '../components/Button';
 // Hard-coded transaction data
 import transactions from '../data/transactions';
 
+//import { calculateBalance } from '../actions/wallet';
+
 class Send extends Component {
+
+  static propTypes = {
+    dispatch: PropTypes.func,
+  }
 
   constructor (props) {
     super(props);
@@ -47,19 +55,7 @@ class Send extends Component {
     console.log('Receiver: '+this.state.receiver+'\nAmount: '+this.state.totalAmount);
     // Makes the modal pop up
     this.setModalVisible(true);
-  }
-
-  // Temp code for calculating hard-coded transactions
-  // We will not be using this function in the future!
-  calculateBalance = (arr) => {
-    let balance = 0;
-    for (i = 0; i < arr.length; i++) {
-      if (arr[i].type =='Received')
-        balance += arr[i].amount;
-      else
-        balance -= arr[i].amount;
-    }
-    return balance;
+    console.log(this.props);
   }
 
   render() {
@@ -103,7 +99,7 @@ class Send extends Component {
           <Panel
             type='send'
             mainText='Balance'
-            subText={this.calculateBalance(transactions).toString() + ' ₳'}
+            subText={this.props.balance + ' ₳'}
             disabled={true}
           />
           <SubContainer>
@@ -132,7 +128,18 @@ class Send extends Component {
   }
 }
 
-export default Send;
+const mapStateToProps = (state) => {
+  const balance = state.wallet.balance;
+  const numTransactions = state.wallet.numTransactions;
+  const lastTransactionDate = state.wallet.lastTransactionDate;
+  return {
+    balance,
+    numTransactions,
+    lastTransactionDate,
+  }
+};
+
+export default connect(mapStateToProps)(Send);
 
 const styles = EStyleSheet.create({
   text: {
