@@ -12,9 +12,11 @@ class SubContainer extends Component {
       containerStyles.push(styles.modalContainer);
     }
     return (
-      <View style={containerStyles}>
-        { this.props.children }
-      </View>
+      <TouchableOpacity activeOpacity={1}>
+        <View style={containerStyles}>
+          { this.props.children }
+        </View>
+      </TouchableOpacity>
     );
 
   }

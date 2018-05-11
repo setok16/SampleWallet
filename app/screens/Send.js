@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, StatusBar, ScrollView, TextInput, Modal, TouchableHighlight } from 'react-native';
+import { Text, View, StatusBar, ScrollView, TextInput, Modal, TouchableHighlight, Alert } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { connect } from 'react-redux';
 
@@ -11,7 +11,7 @@ import { Button } from '../components/Button';
 // Hard-coded transaction data
 import transactions from '../data/transactions';
 
-//import { calculateBalance } from '../actions/wallet';
+import { decrementBalance } from '../actions/wallet';
 
 class Send extends Component {
 
@@ -83,13 +83,27 @@ class Send extends Component {
                       text=' Send '
                       onPress={() => {
                         this.setModalVisible(!this.state.modalVisible);
+                        if ((this.props.balance - this.state.totalAmount) < 0) {
+                          // If insufficient balance
+                          Alert.alert(
+                            'Insufficient Balance',
+                            'Your balance is insufficient for this transaction\nBalance: '
+                            + this.props.balance + ' ₳\nTotal Due: ' + this.state.totalAmount +' ₳',
+                            [
+                              { text: 'Ok' }
+                            ],
+                            { cancelable: false }
+                          )
+                        } else {
+                          this.props.dispatch(decrementBalance(this.state.amount));
+                        }
                         this.props.navigation.goBack();
                     }}/>
                     <Button
                       text='Cancel'
                       onPress={() => {
                         this.setModalVisible(!this.state.modalVisible);
-                        this.props.navigation.goBack();
+                        //this.props.navigation.goBack();
                     }}/>
                   </View>
               </SubContainer>

@@ -11,7 +11,12 @@ import { Header } from '../components/Header';
 import { Panel } from '../components/Panel';
 import { BigPanel } from '../components/BigPanel';
 
-import { calculateBalance, calculateNumTransactions, getLastTransactionDate } from '../actions/wallet';
+import {
+  calculateBalance,
+  calculateNumTransactions,
+  getLastTransactionDate,
+  getInitialConversion,
+} from '../actions/wallet';
 
 class Home extends Component {
 
@@ -21,20 +26,22 @@ class Home extends Component {
   }
 
   componentWillMount() {
-    // Building props (Must be attached from store to this.props)
+    // Building props (Must be used to attach data from store to this.props)
+    this.props.dispatch(getInitialConversion());
     this.props.dispatch(calculateBalance());
     this.props.dispatch(calculateNumTransactions());
     this.props.dispatch(getLastTransactionDate());
   }
 
+  handleWalletPress = () => {
+    // Button still secretly active and logs this.props
+    this.props.dispatch(getInitialConversion());
+    console.log(this.props);
+  }
+
   handleMenuPress = () => {
     console.log('Menu Pressed');
     this.props.navigation.navigate('DrawerToggle');
-  }
-
-  handleWalletPress = () => {
-    // Button still active and logs this.props
-    console.log(this.props);
   }
 
   handleSendPress = () => {
@@ -65,7 +72,7 @@ class Home extends Component {
               type='home'
               onPress={this.handleWalletPress}
               mainText='Wallet'
-              subText={this.props.balance+' ₳'}
+              subText={this.props.balance+' ₳  :  '+(this.props.isFetching ? 'loading...' : ' $'+(this.props.balance*this.props.rates.USD).toFixed(2))}
               smallText1={'Total Transactions:\t' + this.props.numTransactions}
               smallText2={'Latest Transaction:\t' + this.props.lastTransactionDate}
               disabled={true}
@@ -86,15 +93,21 @@ class Home extends Component {
   }
 }
 
-// Allows us to use information from store in this component
+// Allows us to use information from store as this.props in this component
 const mapStateToProps = (state) => {
   const balance = state.wallet.balance;
   const numTransactions = state.wallet.numTransactions;
   const lastTransactionDate = state.wallet.lastTransactionDate;
+  const isFetching = state.wallet.isFetching;
+  const rateUpdateDate = state.wallet.rateUpdateDate;
+  const rates = state.wallet.rates;
   return {
     balance,
     numTransactions,
     lastTransactionDate,
+    isFetching,
+    rateUpdateDate,
+    rates,
   };
 };
 
