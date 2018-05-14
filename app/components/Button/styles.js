@@ -14,5 +14,6 @@ export default EStyleSheet.create({
   },
   text: {
      color: '$white',
+     fontWeight: '200',
   },
 });

@@ -32,7 +32,16 @@ class Receive extends Component {
   }
 
   handleAddressChange = () => {
-    this.props.dispatch(getNewAddress());
+    Alert.alert(
+      'Confirm Address Change',
+      'If you change your wallet address, you will not be able to receive funds from senders using your current address.',
+      [
+        { text: 'Ok', onPress: () => this.props.dispatch(getNewAddress()) },
+        { text: 'Cancel' }
+      ],
+      { cancelable: false }
+    )
+    //this.props.dispatch(getNewAddress());
   }
 
   render() {

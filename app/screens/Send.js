@@ -64,6 +64,7 @@ class Send extends Component {
         <StatusBar translucent={false} barStyle="default"/>
         <ScrollView style={{flex: 1, paddingTop: 10}}>
 
+          {/* This might have to become a separate component for cleaner code */}
           <Modal
             animationType="fade"
             transparent={true}
@@ -75,9 +76,9 @@ class Send extends Component {
           >
             <View style={{paddingTop:200, alignSelf:'center'}}>
               <SubContainer modalMode={true}>
-                  <Text style={{color:'#353535'}}>Receiver: {this.state.receiver}</Text>
-                  <Text style={{color:'#353535'}}>Amount to be sent: {this.state.amount}</Text>
-                  <Text style={{color:'#353535'}}>Amount withdrawn: {this.state.totalAmount}</Text>
+                  <Text style={styles.modalText}>Receiver: {this.state.receiver}</Text>
+                  <Text style={styles.modalText}>Amount to be sent: {this.state.amount} ₳</Text>
+                  <Text style={styles.modalText}>Amount withdrawn: {this.state.totalAmount} ₳</Text>
                   <View style={{flexDirection:'row', justifyContent:'center'}}>
                     <Button
                       text=' Send '
@@ -158,6 +159,10 @@ export default connect(mapStateToProps)(Send);
 const styles = EStyleSheet.create({
   text: {
     color: '$white',
+    fontWeight: '200',
+  },
+  modalText: {
+    color: '$gray',
     fontWeight: '200',
   },
   smallText: {
