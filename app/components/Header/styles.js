@@ -4,7 +4,7 @@ import { StatusBar } from 'react-native';
 
 const styles = EstyleSheet.create({
   container: {
-    backgroundColor: '$gray',
+    backgroundColor: '$darkGray',
     alignItems: 'center',
     //flex: 1,
     flexDirection: 'row',
@@ -12,7 +12,7 @@ const styles = EstyleSheet.create({
     right: 0,
     top: 0,
     bottom: 0,
-    height: 100,
+    height: 70,
     /*
     // TopBar component takes care of status bar difference
     // and colors the status bar black.
