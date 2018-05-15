@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, StatusBar, ScrollView, TextInput, Modal, TouchableHighlight, Alert } from 'react-native';
+import { Text, View, StatusBar, ScrollView, TextInput, Modal, TouchableHighlight, Alert, Dimensions } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { connect } from 'react-redux';
+import { BarCodeScanner, Permissions } from 'expo';
 
 import { Container } from '../components/Container';
 import { Panel } from '../components/Panel';
 import { SubContainer } from '../components/SubContainer';
 import { Button } from '../components/Button';
+import { CameraButton } from '../components/CameraButton';
 // Hard-coded transaction data
 import transactions from '../data/transactions';
 
@@ -28,7 +30,14 @@ class Send extends Component {
       transactionFee: 0,
       totalAmount: 0,
       modalVisible: false,
+      hasCameraPermission: null,
+      lastScannedUrl: null,
     }
+  }
+
+  async componentWillMount() {
+    const { status } = await Permissions.askAsync(Permissions.CAMERA);
+    this.setState({hasCameraPermission: status === 'granted'});
   }
 
   // Function toggles modal's visible state
@@ -37,6 +46,7 @@ class Send extends Component {
   }
 
   handleReceiverChange = (receiver) => {
+    this.setState({lastScannedUrl: null})
     this.setState({receiver});
   }
 
@@ -51,95 +61,125 @@ class Send extends Component {
   }
 
   handleButtonPress = () => {
-    console.log('Button Pressed!')
-    console.log('Receiver: '+this.state.receiver+'\nAmount: '+this.state.totalAmount);
-    // Makes the modal pop up
+    Alert.alert(
+      'Confirmation',
+      'Receiver: ' + this.state.receiver +
+      '\n Amount to be sent: ' + this.state.amount +
+      ' ₳\nAmount withdrawn: ' + this.state.totalAmount + ' ₳',
+      [
+        { text: 'Send', onPress: () => {
+          if ((this.props.balance - this.state.totalAmount) < 0) {
+            Alert.alert(
+              'Insufficient Balance',
+              'Your balance is insufficient for this transaction\nBalance: '
+              + this.props.balance + ' ₳\nTotal Due: ' + this.state.totalAmount +' ₳',
+              [
+                { text: 'Ok' }
+              ],
+              { cancelable: false }
+            );
+          } else {
+            this.props.dispatch(decrementBalance(this.state.totalAmount));
+            this.props.navigation.goBack();
+          }
+        }},
+        { text: 'Cancel' }
+      ],
+      { cencelable: false }
+    );
+  }
+
+  _handleBarCodeRead = (result) => {
+    console.log('barcode read');
+    if (result.data !== this.state.lastScannedUrl) {
+      this.setState( {lastScannedUrl: result.data });
+    }
+    this.setModalVisible(false);
+  }
+  /* We might need this later
+  _requestCameraPermission = async () => {
+    const { status } = await Permissions.askAsync(Permissions.CAMERA);
+    this.setState({
+      hasCameraPermission: status === 'granted',
+    });
+  }
+  */
+
+  handleCameraPress = () => {
+    // Makes the camera modal pop up
     this.setModalVisible(true);
-    console.log(this.props);
   }
 
   render() {
-    return (
-      <Container>
-        <StatusBar translucent={false} barStyle="default"/>
-        <ScrollView style={{flex: 1, paddingTop: 10}}>
+    const { hasCameraPermission } = this.state;
 
-          {/* This might have to become a separate component for cleaner code */}
-          <Modal
-            animationType="fade"
-            transparent={true}
-            presentationStyle='overFullScreen'
-            visible={this.state.modalVisible}
-            onRequestClose={() => {
-              alert('Modal has been closed.');
-            }}
-          >
-            <View style={{paddingTop:200, alignSelf:'center'}}>
-              <SubContainer modalMode={true}>
-                  <Text style={styles.modalText}>Receiver: {this.state.receiver}</Text>
-                  <Text style={styles.modalText}>Amount to be sent: {this.state.amount} ₳</Text>
-                  <Text style={styles.modalText}>Amount withdrawn: {this.state.totalAmount} ₳</Text>
-                  <View style={{flexDirection:'row', justifyContent:'center'}}>
-                    <Button
-                      text=' Send '
-                      onPress={() => {
-                        this.setModalVisible(!this.state.modalVisible);
-                        if ((this.props.balance - this.state.totalAmount) < 0) {
-                          // If insufficient balance
-                          Alert.alert(
-                            'Insufficient Balance',
-                            'Your balance is insufficient for this transaction\nBalance: '
-                            + this.props.balance + ' ₳\nTotal Due: ' + this.state.totalAmount +' ₳',
-                            [
-                              { text: 'Ok' }
-                            ],
-                            { cancelable: false }
-                          )
-                        } else {
-                          this.props.dispatch(decrementBalance(this.state.amount));
-                        }
-                        this.props.navigation.goBack();
-                    }}/>
-                    <Button
-                      text='Cancel'
-                      onPress={() => {
-                        this.setModalVisible(!this.state.modalVisible);
-                        //this.props.navigation.goBack();
-                    }}/>
-                  </View>
-              </SubContainer>
-            </View>
-          </Modal>
+    if (hasCameraPermission === null) {
+      return <Text>Requesting for camera permission</Text>;
+    } else if (hasCameraPermission === false) {
+      return <Text>No access to camera</Text>;
+    } else {
+      return (
+        <Container>
+          <StatusBar translucent={false} barStyle="default"/>
+          <ScrollView style={{flex: 1, paddingTop: 10}}>
 
-          <Panel
-            type='send'
-            mainText='Balance'
-            subText={this.props.balance + ' ₳'}
-            disabled={true}
-          />
-          <SubContainer>
-            <Text style={styles.text}>Receiver:</Text>
-            <TextInput
-              style={styles.input}
-              underlineColorAndroid="transparent"
-              onChangeText={this.handleReceiverChange}
-              placeholder='Wallet Address'
+            {/* This might have to become a separate component for cleaner code */}
+            <Modal
+              animationType="fade"
+              transparent={false}
+              presentationStyle='overFullScreen'
+              visible={this.state.modalVisible}
+              onRequestClose={()=>this.setModalVisible(!this.state.modalVisible)}
+            >
+              <View style={{alignItems: 'center'}}>
+                <BarCodeScanner
+                  onBarCodeRead={this._handleBarCodeRead}
+                  style={{
+                    height: Dimensions.get('window').height-100,
+                    width: Dimensions.get('window').width,
+                  }}
+                />
+              </View>
+              <View style={{alignItems: 'center',backgroundColor:'#434343', height:100, paddingTop:10}}>
+                <Text style={styles.text}>Line up the QR code to your device's camera</Text>
+                <Button text='Cancel' onPress={() => this.setModalVisible(!this.state.modalVisible)} />
+              </View>
+            </Modal>
+
+            <Panel
+              type='send'
+              mainText='Balance'
+              subText={this.props.balance + ' ₳'}
+              disabled={true}
             />
-            <Text style={styles.text}>Amount:</Text>
-            <TextInput
-              style={styles.input}
-              underlineColorAndroid="transparent"
-              onChangeText={this.handleAmountChange}
-              keyboardType='numeric'
-              placeholder='0.0000000'
-            />
-            <Text style={styles.smallText}>+{this.state.transactionFee.toFixed(7)} ₳ (Transaction Fee)</Text>
-            <Text style={styles.text}>Total Withdrawn: {!this.state.totalAmount ? 0 : this.state.totalAmount.toFixed(7)} ₳</Text>
-            <Button text='Next' onPress={this.handleButtonPress} style={{paddingTop: 10}}/>
-          </SubContainer>
-        </ScrollView>
-      </Container>
-    );
+            <SubContainer>
+              <View style={{flexDirection: 'row'}}>
+                <Text style={styles.text}>Receiver:   </Text>
+                <CameraButton style={{alignSelf: 'center'}} onPress={this.handleCameraPress}/>
+              </View>
+              <TextInput
+                style={styles.input}
+                underlineColorAndroid="transparent"
+                onChangeText={this.handleReceiverChange}
+                value={this.state.lastScannedUrl}
+                placeholder='Wallet Address'
+              />
+              <Text style={styles.text}>Amount:</Text>
+              <TextInput
+                style={styles.input}
+                underlineColorAndroid="transparent"
+                onChangeText={this.handleAmountChange}
+                keyboardType='numeric'
+                placeholder='0.0000000'
+              />
+              <Text style={styles.smallText}>+{this.state.transactionFee.toFixed(7)} ₳ (Transaction Fee)</Text>
+              <Text style={styles.text}>Total Withdrawn: {!this.state.totalAmount ? 0 : this.state.totalAmount.toFixed(7)} ₳</Text>
+              <Button text='Next' onPress={this.handleButtonPress} style={{paddingTop: 10}}/>
+            </SubContainer>
+          </ScrollView>
+        </Container>
+      );
+    }
   }
 }
 
