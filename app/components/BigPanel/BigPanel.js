@@ -9,7 +9,8 @@ const BigPanel = (props) => {
     type,
     onPress,
     mainText,
-    subText,
+    subUpperText,
+    subLowerText,
     smallText1,
     smallText2,
     disabled } = props;
@@ -28,11 +29,13 @@ const BigPanel = (props) => {
     <View style={styles.wrapper}>
       <TouchableOpacity style={containerStyles} onPress={onPress} activeOpacity={disabled ? 1 : 0}>
         <View style={styles.subContainer}>
-          <Image source={imageSource} style={styles.icon}/>
           <View style={styles.textContainer}>
             <View style={{flexDirection:'column'}}>
               <Text style={styles.mainText}>{mainText}</Text>
-              <Text style={styles.subText}>{subText}</Text>
+              <View style={{alignItems:'flex-start'}}>
+                <Text style={styles.subText}>{subUpperText}</Text>
+                <Text style={styles.subLowerText}>{subLowerText}</Text>
+              </View>
               <Text style={styles.smallText}>{smallText1}</Text>
               <Text style={styles.smallText}>{smallText2}</Text>
             </View>

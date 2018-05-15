@@ -1,10 +1,10 @@
 
 import React, { Component } from 'react';
-import { Text, FlatList, StatusBar } from 'react-native';
+import { FlatList, StatusBar } from 'react-native';
 import Moment from 'moment';
 
 import { Container } from '../components/Container';
-import { Panel } from '../components/Panel';
+import { TransactionPanel } from '../components/TransactionPanel';
 import transactions from '../data/transactions';
 
 class Transactions extends Component {
@@ -15,17 +15,16 @@ class Transactions extends Component {
         <FlatList
           data={transactions}
           renderItem={({ item }) => (
-            <Panel
-              type='transactions'
+            <TransactionPanel
               mainText={item.type}
               upperText={Moment(item.date).format('YYYY/MM/DD hh:mm')}
-              subText={item.amount.toFixed(7).toString()+' ₳'}
+              subUpperText={item.amount.toFixed(7).toString()+' ₳'}
+              subLowerText={(item.amount*item.rate.JYP).toFixed(0)+' ¥'}
               disabled={true}
             />
           )}
           keyExtractor={(item, index) => index.toString()}
-          style={{paddingTop:10}}
-        >
+          >
         </FlatList>
       </Container>
     );

@@ -72,7 +72,8 @@ class Home extends Component {
               type='home'
               onPress={this.handleWalletPress}
               mainText='Wallet'
-              subText={this.props.balance+' ₳  :  '+(this.props.isFetching ? 'loading...' : ' $'+(this.props.balance*this.props.rates.USD).toFixed(2))}
+              subUpperText={(this.props.balance*1).toFixed(7)+' ₳'}
+              subLowerText={(this.props.isFetching ? ' loading...' : ' '+(this.props.balance*this.props.rates.JPY).toFixed(0)+' ¥')}
               smallText1={'Total Transactions:\t' + this.props.numTransactions}
               smallText2={'Latest Transaction:\t' + this.props.lastTransactionDate}
               disabled={true}

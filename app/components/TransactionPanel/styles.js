@@ -8,16 +8,15 @@ export default EStyleSheet.create({
     flexDirection: 'column',
     paddingLeft: 20,
     paddingRight: 20,
-    height: 160,
-    marginTop: 10,
-    marginBottom: 5,
+    height: 70,
+    marginTop: 20,
   },
   container: {
     backgroundColor: '$darkGray',
     marginBottom: 10,
     borderRadius: 10,
     alignSelf: 'stretch',
-    height: 160,
+    height: 83,
     borderWidth: 1,
     borderColor: '$border',
   },
@@ -31,7 +30,6 @@ export default EStyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     flexDirection: 'row',
-    height: 160,
   },
   icon: {
     height: null,
@@ -41,11 +39,14 @@ export default EStyleSheet.create({
   },
   textContainer: {
     flex: 1,
-    //paddingLeft: 20,
+    paddingLeft: 20,
+    flexDirection: 'column',
+  },
+  upperContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
   },
   mainText: {
+    flex: 0.6,
     color: '$white',
     fontWeight: '200',
     fontSize: 20,
@@ -53,17 +54,13 @@ export default EStyleSheet.create({
   subText: {
     color: '$white',
     fontWeight: '200',
-    fontSize: 30,
-  },
-  subLowerText: {
-    color: '$white',
-    fontWeight: '200',
-    fontSize: 20,
-    left:-3,
-  },
-  smallText: {
-    color: '$white',
-    fontWeight: '200',
     fontSize: 15,
+  },
+  upperText: {
+    flex: 0.4,
+    alignSelf: 'center',
+    color: '$white',
+    fontWeight: '200',
+    fontSize: 10,
   }
 });
