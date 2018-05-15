@@ -8,6 +8,7 @@
     "orientation": "portrait",
     "sdkVersion": "26.0.0",
     "ios": {
+      "bundleIdentifier": "com.kotaroseto.samplewallet",
       "supportsTablet": true,
       "buildNumber": "0"
     },

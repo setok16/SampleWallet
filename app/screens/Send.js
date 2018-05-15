@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, StatusBar, ScrollView, TextInput, Modal, TouchableHighlight, Alert, Dimensions } from 'react-native';
+import { Text, View, StatusBar, ScrollView, TextInput, Modal, Image, TouchableHighlight, Alert, Dimensions } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { connect } from 'react-redux';
 import { BarCodeScanner, Permissions } from 'expo';
@@ -138,7 +138,12 @@ class Send extends Component {
                     height: Dimensions.get('window').height-100,
                     width: Dimensions.get('window').width,
                   }}
-                />
+                >
+                  <Image
+                    source={require('../images/reticle.png')}
+                    style={{tintColor:'#FFF', width:Dimensions.get('window').width-50, height:Dimensions.get('window').width-50, alignSelf:'center', top:Dimensions.get('window').height*0.16}}
+                  />
+                </BarCodeScanner>
               </View>
               <View style={{alignItems: 'center',backgroundColor:'#434343', height:100, paddingTop:10}}>
                 <Text style={styles.text}>Line up the QR code to your device's camera</Text>

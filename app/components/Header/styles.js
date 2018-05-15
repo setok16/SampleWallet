@@ -32,7 +32,7 @@ const styles = EstyleSheet.create({
     margin: 20,
     width: 30,
     height: 25,
-    tintColor: '$lightGray',
+    tintColor: '$white',
   },
   text: {
     flex: 0.85,
@@ -40,7 +40,7 @@ const styles = EstyleSheet.create({
     fontSize: 20,
     margin: 20,
     marginTop: 20,
-    color: '$lightGray',
+    color: '$white',
     alignSelf: 'center',
   },
 });
