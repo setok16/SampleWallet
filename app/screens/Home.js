@@ -71,14 +71,14 @@ class Home extends Component {
             <BigPanel
               type='home'
               onPress={this.handleWalletPress}
-              mainText='Wallet'
+              mainText='Main Wallet'
               subUpperText={(this.props.balance*1).toFixed(7)+' ₳'}
               subLowerText={(this.props.isFetching ? ' loading...' : ' '+(this.props.balance*this.props.rates.JPY).toFixed(0)+' ¥')}
               smallText1={'Total Transactions:\t' + this.props.numTransactions}
               smallText2={'Latest Transaction:\t' + this.props.lastTransactionDate}
               disabled={true}
             />
-          <Panel type='home' onPress={this.handleSendPress} mainText='Send' subText='Select to send' />
+            <Panel type='home' onPress={this.handleSendPress} mainText='Send' subText='Select to send' />
             <Panel type='home' onPress={this.handleReceivePress} mainText='Receive' subText='Select to receive' />
             <Panel type='home' onPress={this.handleTransactionsPress} mainText='Transactions' subText='View your transactions' />
             <Panel type='home' onPress={this.handleSettingsPress} mainText='Settings' subText='Change settings' />

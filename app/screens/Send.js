@@ -67,6 +67,7 @@ class Send extends Component {
       '\n Amount to be sent: ' + this.state.amount +
       ' ₳\nAmount withdrawn: ' + this.state.totalAmount + ' ₳',
       [
+        { text: 'Cancel' },
         { text: 'Send', onPress: () => {
           if ((this.props.balance - this.state.totalAmount) < 0) {
             Alert.alert(
@@ -82,8 +83,7 @@ class Send extends Component {
             this.props.dispatch(decrementBalance(this.state.totalAmount));
             this.props.navigation.goBack();
           }
-        }},
-        { text: 'Cancel' }
+        }}
       ],
       { cencelable: false }
     );
@@ -93,6 +93,7 @@ class Send extends Component {
     console.log('barcode read');
     if (result.data !== this.state.lastScannedUrl) {
       this.setState( {lastScannedUrl: result.data });
+      this.setState( {receiver: result.data} );
     }
     this.setModalVisible(false);
   }
