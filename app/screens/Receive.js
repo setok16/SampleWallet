@@ -88,7 +88,7 @@ class Receive extends Component {
           <KeyboardAvoidingView style={{marginBottom:200}}behavior='padding' enabled>
             <SubContainer>
               <Text style={styles.text}>Your wallet address:</Text>
-              <View style={{left:-15}}>
+              <View style={{left:-10,alignSelf:'flex-start'}}>
                 <Button text={this.props.address} onPress={this._handleClipboardButton}/>
               </View>
               <Text style={styles.text}>Receiving Amount (Optional):</Text>

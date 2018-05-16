@@ -192,7 +192,9 @@ class Send extends Component {
               <CurrencyPicker onChange={this._handlePickerValueChange} initValue={this.state.currency} />
               <Text style={styles.smallText}>+{this.state.currency=='ADA'?this.state.transactionFee.toFixed(7)+' ₳':this.state.transactionFee.toFixed(0)+' ¥'} (Transaction Fee)</Text>
               <Text style={styles.text}>Total Withdrawn: {!this.state.totalAmount ? 0 : this.state.currency=='ADA'? this.state.totalAmount.toFixed(7)+' ₳':this.state.totalAmount.toFixed(0)+' ¥'}</Text>
-              <Button text='Next' onPress={this._handleButtonPress} style={{paddingTop: 10}}/>
+              <View style={{left:-10,alignSelf:'flex-start'}}>
+                <Button text='Next' onPress={this._handleButtonPress} style={{paddingTop: 10}}/>
+              </View>
             </SubContainer>
           </ScrollView>
         </Container>
