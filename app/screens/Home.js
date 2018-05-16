@@ -33,30 +33,30 @@ class Home extends Component {
     this.props.dispatch(getLastTransactionDate());
   }
 
-  handleWalletPress = () => {
+  _handleWalletPress = () => {
     // Button still secretly active and logs this.props
     this.props.dispatch(getInitialConversion());
     console.log(this.props);
   }
 
-  handleMenuPress = () => {
+  _handleMenuPress = () => {
     console.log('Menu Pressed');
     this.props.navigation.navigate('DrawerToggle');
   }
 
-  handleSendPress = () => {
+  _handleSendPress = () => {
     this.props.navigation.navigate('Send');
   }
 
-  handleReceivePress = () => {
+  _handleReceivePress = () => {
     this.props.navigation.navigate('Receive');
   }
 
-  handleTransactionsPress = () => {
+  _handleTransactionsPress = () => {
     this.props.navigation.navigate('Transactions');
   }
 
-  handleSettingsPress = () => {
+  _handleSettingsPress = () => {
     this.props.navigation.navigate('Settings');
   }
 
@@ -65,12 +65,12 @@ class Home extends Component {
       <Container>
         <TopBar/>
         <StatusBar translucent={false} barStyle="light-content" />
-        <Header onPress={this.handleMenuPress} headerText='MY ADA WALLET'/>
+        <Header onPress={this._handleMenuPress} headerText='MY ADA WALLET'/>
         <ScrollView style={{flex: 1, paddingTop: 10, flexDirection: 'column'}}>
           <View style={{justifyContent:'center', flexDirection: 'column'}}>
             <BigPanel
               type='home'
-              onPress={this.handleWalletPress}
+              onPress={this._handleWalletPress}
               mainText='Main Wallet'
               subUpperText={(this.props.balance*1).toFixed(7)+' ₳'}
               subLowerText={(this.props.isFetching ? ' loading...' : ' '+(this.props.balance*this.props.rates.JPY).toFixed(0)+' ¥')}
@@ -78,10 +78,10 @@ class Home extends Component {
               smallText2={'Latest Transaction:\t' + this.props.lastTransactionDate}
               disabled={true}
             />
-            <Panel type='home' onPress={this.handleSendPress} mainText='Send' subText='Select to send' />
-            <Panel type='home' onPress={this.handleReceivePress} mainText='Receive' subText='Select to receive' />
-            <Panel type='home' onPress={this.handleTransactionsPress} mainText='Transactions' subText='View your transactions' />
-            <Panel type='home' onPress={this.handleSettingsPress} mainText='Settings' subText='Change settings' />
+            <Panel type='home' onPress={this._handleSendPress} mainText='Send' subText='Select to send' />
+            <Panel type='home' onPress={this._handleReceivePress} mainText='Receive' subText='Select to receive' />
+            <Panel type='home' onPress={this._handleTransactionsPress} mainText='Transactions' subText='View your transactions' />
+            <Panel type='home' onPress={this._handleSettingsPress} mainText='Settings' subText='Change settings' />
             <Text style={{padding: 25, color:'#FFF', fontWeight:'200'}}>
               This application and its content is copyright of BUSINESS - © BUSINESS 2018.
               {"\n"}
