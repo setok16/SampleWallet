@@ -209,7 +209,7 @@ class Send extends Component {
           />
           <SubContainer>
             <View style={{ flexDirection: 'row' }}>
-              <Text style={styles.text}>Receiver:   </Text>
+              <Text style={styles.text}>Receiver:</Text>
               <CameraButton style={{ alignSelf: 'center' }} onPress={this.handleCameraPress} />
             </View>
             <InputBox onChangeText={this.handleReceiverChange} value={this.state.receiver} placeholder="Wallet Address" />

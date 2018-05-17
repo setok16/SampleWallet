@@ -51,7 +51,7 @@ const HomeStack = StackNavigator({
   headerMode: 'screen', // Makes page transition smoother
 });
 
-const DrawerStack = DrawerNavigator({
+/* const DrawerStack = DrawerNavigator({
   MenuItem1: {
     screen: MenuItem1,
     navigationOptions: {
@@ -60,7 +60,7 @@ const DrawerStack = DrawerNavigator({
   },
 }, {
   drawerPosition: 'left',
-});
+}); */
 
 export default DrawerNavigator({
   Home: {
