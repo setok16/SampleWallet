@@ -7,7 +7,7 @@ import styles from './styles';
 const Button = (props) => {
   const { text, onPress } = props;
   return (
-    <TouchableOpacity onPress={onPress} style={{alignSelf:'center'}}>
+    <TouchableOpacity onPress={onPress} style={{ alignSelf: 'center' }}>
       <View style={styles.container}>
         <Text style={styles.text}>{text}</Text>
       </View>
@@ -18,6 +18,6 @@ const Button = (props) => {
 Button.propTypes = {
   text: PropTypes.string,
   onPress: PropTypes.func,
-}
+};
 
 export default Button;

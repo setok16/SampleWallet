@@ -18,14 +18,13 @@ class Transactions extends Component {
             <TransactionPanel
               mainText={item.type}
               upperText={Moment(item.date).format('YYYY/MM/DD hh:mm')}
-              subUpperText={item.amount.toFixed(7).toString()+' ₳'}
-              subLowerText={(item.amount*item.rate.JYP).toFixed(0)+' ¥'}
-              disabled={true}
+              subUpperText={`${item.amount.toFixed(7).toString()} ₳`}
+              subLowerText={`${(item.amount * item.rate.JYP).toFixed(0)} ¥`}
+              disabled
             />
           )}
           keyExtractor={(item, index) => index.toString()}
-          >
-        </FlatList>
+        />
       </Container>
     );
   }

@@ -5,7 +5,7 @@ class Wallet extends Component {
   render() {
     return (
       <View>
-        <StatusBar translucent={false} barStyle="default"/>
+        <StatusBar translucent={false} barStyle="default" />
         <View style={{ padding: 30, alignItems: 'center' }}>
           <Text>Demo Transactions page</Text>
         </View>

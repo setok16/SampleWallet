@@ -5,12 +5,14 @@ import { TextInput } from 'react-native';
 import styles from './styles';
 
 const InputBox = (props) => {
-  const { onChangeText, keyboardType, value, placeholder, secureTextEntry } = props;
+  const {
+    onChangeText, keyboardType, value, placeholder, secureTextEntry,
+  } = props;
 
   return (
     <TextInput
-      style = {styles.input}
-      underlineColorAndroid='transparent'
+      style={styles.input}
+      underlineColorAndroid="transparent"
       onChangeText={onChangeText}
       keyboardType={keyboardType}
       placeholder={placeholder}
@@ -24,7 +26,7 @@ InputBox.propTypes = {
   onChangeText: PropTypes.func,
   keyboardType: PropTypes.string,
   value: PropTypes.string,
-  placeHolder: PropTypes.string,
+  placeholder: PropTypes.string,
   secureTextEntry: PropTypes.bool,
 };
 

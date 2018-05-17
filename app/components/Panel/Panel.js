@@ -5,7 +5,9 @@ import { View, TouchableOpacity, Text, Image } from 'react-native';
 import styles from './styles';
 
 const Panel = (props) => {
-  const { type, onPress, mainText, subText, upperText, disabled } = props;
+  const {
+    type, onPress, mainText, subText, upperText, disabled,
+  } = props;
 
   // Statically set imageSource, since require() cannot be set dynamically
   let imageSource = '';
@@ -35,8 +37,10 @@ const Panel = (props) => {
     }
     case 'send': { // For panels used in Send screen only
       imageSource = require('./images/wallet.png');
-
+      break;
     }
+    default:
+      break;
   }
 
   const containerStyles = [styles.container];
@@ -48,7 +52,7 @@ const Panel = (props) => {
     <View style={styles.wrapper}>
       <TouchableOpacity style={containerStyles} activeOpacity={disabled ? 1 : 0} onPress={onPress}>
         <View style={styles.subContainer}>
-          <Image source={imageSource} style={styles.icon}/>
+          <Image source={imageSource} style={styles.icon} />
           <View style={styles.textContainer}>
             <View style={styles.upperContainer}>
               <Text style={styles.mainText}>{mainText}</Text>
@@ -69,6 +73,6 @@ Panel.propTypes = {
   subText: PropTypes.string,
   upperText: PropTypes.string,
   disabled: PropTypes.bool, // Sets active opacity to 1 if true
-}
+};
 
 export default Panel;

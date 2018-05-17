@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, TouchableOpacity, Text, Image } from 'react-native';
+import { View, TouchableOpacity, Image } from 'react-native';
 
 import styles from './styles';
 
@@ -9,7 +9,7 @@ const CameraButton = (props) => {
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.container}>
-        <Image source={require('./images/camera.png')} style={styles.icon}/>
+        <Image source={require('./images/camera.png')} style={styles.icon} />
       </View>
     </TouchableOpacity>
   );
@@ -17,6 +17,6 @@ const CameraButton = (props) => {
 
 CameraButton.propTypes = {
   onPress: PropTypes.func,
-}
+};
 
 export default CameraButton;

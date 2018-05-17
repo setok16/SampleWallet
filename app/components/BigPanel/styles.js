@@ -1,7 +1,7 @@
 import { Dimensions } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-//const imageWidth = Dimensions.get('window').width / 2;
+// const imageWidth = Dimensions.get('window').width / 2;
 
 export default EStyleSheet.create({
   wrapper: {
@@ -41,7 +41,7 @@ export default EStyleSheet.create({
   },
   textContainer: {
     flex: 1,
-    //paddingLeft: 20,
+    // paddingLeft: 20,
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -59,11 +59,11 @@ export default EStyleSheet.create({
     color: '$white',
     fontWeight: '200',
     fontSize: 20,
-    left:-3,
+    left: -3,
   },
   smallText: {
     color: '$white',
     fontWeight: '200',
     fontSize: 15,
-  }
+  },
 });

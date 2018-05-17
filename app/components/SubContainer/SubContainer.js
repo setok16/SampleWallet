@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, TouchableOpacity, Text, Image } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 
-//const SubContainer = (props) => {
+// const SubContainer = (props) => {
 class SubContainer extends Component {
-  render () {
+  render() {
     const containerStyles = [styles.container];
     if (this.props.modalMode) {
       containerStyles.push(styles.modalContainer);
@@ -18,19 +18,13 @@ class SubContainer extends Component {
         </View>
       </TouchableOpacity>
     );
-
   }
 }
 
 
 SubContainer.propTypes = {
-  type: PropTypes.string,
-  onPress: PropTypes.func,
-  mainText: PropTypes.string,
-  subText: PropTypes.string,
-  smallText1: PropTypes.string,
-  smallText2: PropTypes.string,
-  disabled: PropTypes.bool,
-}
+  modalMode: PropTypes.bool,
+  children: PropTypes.array,
+};
 
 export default SubContainer;

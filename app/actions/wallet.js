@@ -24,11 +24,11 @@ export const getNewAddress = () => ({
   type: GET_NEW_ADDRESS,
 });
 
-export const decrementBalance = (amount) => ({
+export const decrementBalance = amount => ({
   type: DECREMENT_BALANCE,
   amount,
 });
 
-export const getInitialConversion= () => ({
+export const getInitialConversion = () => ({
   type: GET_INITIAL_CONVERSION,
 });

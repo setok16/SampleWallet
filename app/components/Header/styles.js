@@ -1,12 +1,11 @@
 
 import EstyleSheet from 'react-native-extended-stylesheet';
-import { StatusBar } from 'react-native';
 
 const styles = EstyleSheet.create({
   container: {
     backgroundColor: '$darkGray',
     alignItems: 'center',
-    //flex: 1,
+    // flex: 1,
     flexDirection: 'row',
     left: 0,
     right: 0,
@@ -21,11 +20,11 @@ const styles = EstyleSheet.create({
     },
     '@media android': {
       paddingTop: StatusBar.currentHeight, // Android specific
-    },*/
+    }, */
   },
   button: {
-    //position: 'absolute',
-    //alignSelf: 'flex-start',
+    // position: 'absolute',
+    // alignSelf: 'flex-start',
     flex: 0.15,
   },
   menu: {

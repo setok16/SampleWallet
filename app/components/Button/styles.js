@@ -13,7 +13,7 @@ export default EStyleSheet.create({
     borderRadius: 5,
   },
   text: {
-     color: '$white',
-     fontWeight: '200',
+    color: '$white',
+    fontWeight: '200',
   },
 });

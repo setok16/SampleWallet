@@ -5,7 +5,6 @@
     "slug": "sample-wallet",
     "privacy": "public",
     "version": "0.0.1",
-    "orientation": "portrait",
     "sdkVersion": "26.0.0",
     "ios": {
       "bundleIdentifier": "com.kotaroseto.samplewallet",

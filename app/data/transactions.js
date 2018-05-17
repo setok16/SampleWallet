@@ -1,4 +1,3 @@
-import Moment from 'moment';
 const SENT = 'Sent';
 const RECEIVED = 'Received';
 
