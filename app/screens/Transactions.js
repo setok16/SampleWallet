@@ -1,15 +1,31 @@
+
 import React, { Component } from 'react';
-import { Text, View, StatusBar } from 'react-native';
+import { FlatList, StatusBar } from 'react-native';
+import Moment from 'moment';
+
+import { Container } from '../components/Container';
+import { TransactionPanel } from '../components/TransactionPanel';
+import transactions from '../data/transactions';
 
 class Transactions extends Component {
   render() {
     return (
-      <View>
-        <StatusBar translucent={false} barStyle="default"/>
-        <View style={{ padding: 30, alignItems: 'center' }}>
-          <Text>Demo Transactions page</Text>
-        </View>
-      </View>
+      <Container>
+        <StatusBar transcucent={false} barStyle="default" />
+        <FlatList
+          data={transactions}
+          renderItem={({ item }) => (
+            <TransactionPanel
+              mainText={item.type}
+              upperText={Moment(item.date).format('YYYY/MM/DD hh:mm')}
+              subUpperText={`${item.amount.toFixed(7).toString()} ₳`}
+              subLowerText={`${(item.amount * item.rate.JYP).toFixed(0)} ¥`}
+              disabled
+            />
+          )}
+          keyExtractor={(item, index) => index.toString()}
+        />
+      </Container>
     );
   }
 }

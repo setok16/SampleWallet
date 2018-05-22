@@ -8,7 +8,7 @@ import Receive from '../screens/Receive';
 import Transactions from '../screens/Transactions';
 import Settings from '../screens/Settings';
 
-import MenuItem1 from '../screens/MenuItem1'
+import MenuItem1 from '../screens/MenuItem1';
 
 const HomeStack = StackNavigator({
   Home: {
@@ -51,16 +51,16 @@ const HomeStack = StackNavigator({
   headerMode: 'screen', // Makes page transition smoother
 });
 
-const DrawerStack = DrawerNavigator({
-    MenuItem1: {
-      screen: MenuItem1,
-      navigationOptions: {
-        headerTitle: 'Menu Option 1',
-      },
+/* const DrawerStack = DrawerNavigator({
+  MenuItem1: {
+    screen: MenuItem1,
+    navigationOptions: {
+      headerTitle: 'Menu Option 1',
     },
+  },
 }, {
   drawerPosition: 'left',
-});
+}); */
 
 export default DrawerNavigator({
   Home: {

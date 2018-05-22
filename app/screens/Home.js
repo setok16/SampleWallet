@@ -1,29 +1,49 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Text, View, StatusBar, ScrollView } from 'react-native';
-import { DrawerNavigator } from 'react-navigation';
+import { connect } from 'react-redux';
 
 import { Container } from '../components/Container';
+import { TopBar } from '../components/TopBar';
 import { Header } from '../components/Header';
 import { Panel } from '../components/Panel';
+import { BigPanel } from '../components/BigPanel';
+
+import {
+  calculateBalance,
+  calculateNumTransactions,
+  getLastTransactionDate,
+  getInitialConversion,
+} from '../actions/wallet';
 
 class Home extends Component {
-
   static propTypes = {
     navigation: PropTypes.object,
+    dispatch: PropTypes.func,
+    balance: PropTypes.number,
+    isFetching: PropTypes.bool,
+    numTransactions: PropTypes.number,
+    lastTransactionDate: PropTypes.string,
+    rates: PropTypes.object,
+  }
+
+  componentWillMount() {
+    // Building props (Must be used to attach data from store to this.props)
+    this.props.dispatch(getInitialConversion());
+    this.props.dispatch(calculateBalance());
+    this.props.dispatch(calculateNumTransactions());
+    this.props.dispatch(getLastTransactionDate());
+  }
+
+  handleWalletPress = () => {
+    // Button still secretly active and logs this.props
+    this.props.dispatch(getInitialConversion());
+    console.log(this.props);
   }
 
   handleMenuPress = () => {
     console.log('Menu Pressed');
     this.props.navigation.navigate('DrawerToggle');
-  }
-
-  handlePanelPress = () => {
-    console.log('Panel Pressed');
-  }
-
-  handleWalletPress = () => {
-    this.props.navigation.navigate('Wallet');
   }
 
   handleSendPress = () => {
@@ -45,18 +65,28 @@ class Home extends Component {
   render() {
     return (
       <Container>
+        <TopBar />
         <StatusBar translucent={false} barStyle="light-content" />
-        <Header onPress={this.handleMenuPress} headerText='MY ADA WALLET'/>
-        <ScrollView style={{flex: 1, paddingTop: 10, flexDirection: 'column'}}>
-          <View style={{justifyContent:'center', flexDirection: 'column'}}>
-            <Panel onPress={this.handleWalletPress} mainText='Wallet' subText='0.0000000A' />
-            <Panel onPress={this.handleSendPress} mainText='Send' subText='Select to send' />
-            <Panel onPress={this.handleReceivePress} mainText='Receive' subText='Select to receive' />
-            <Panel onPress={this.handleTransactionsPress} mainText='Transactions' subText='View your transactions' />
-            <Panel onPress={this.handleSettingsPress} mainText='Settings' subText='Change settings' />
-            <Text style={{padding: 25, color:'#FFF', fontWeight:'200'}}>
+        <Header onPress={this.handleMenuPress} headerText="MY ADA WALLET" />
+        <ScrollView style={{ flex: 1, paddingTop: 10, flexDirection: 'column' }}>
+          <View style={{ justifyContent: 'center', flexDirection: 'column' }}>
+            <BigPanel
+              type="home"
+              onPress={this.handleWalletPress}
+              mainText="Main Wallet"
+              subUpperText={`${(this.props.balance * 1).toFixed(7)} ₳`}
+              subLowerText={(this.props.isFetching ? ' loading...' : ` ${(this.props.balance * this.props.rates.JPY).toFixed(0)} ¥`)}
+              smallText1={`Total Transactions:\t${this.props.numTransactions}`}
+              smallText2={`Latest Transaction:\t${this.props.lastTransactionDate}`}
+              disabled
+            />
+            <Panel type="home" onPress={this.handleSendPress} mainText="Send" subText="Select to send" />
+            <Panel type="home" onPress={this.handleReceivePress} mainText="Receive" subText="Select to receive" />
+            <Panel type="home" onPress={this.handleTransactionsPress} mainText="Transactions" subText="View your transactions" />
+            <Panel type="home" onPress={this.handleSettingsPress} mainText="Settings" subText="Change settings" />
+            <Text style={{ padding: 25, color: '#FFF', fontWeight: '200' }}>
               This application and its content is copyright of BUSINESS - © BUSINESS 2018.
-              {"\n"}
+              {'\n'}
               All rights reserved.
             </Text>
           </View>
@@ -66,8 +96,17 @@ class Home extends Component {
   }
 }
 
+// Allows us to use information from store as this.props in this component
 const mapStateToProps = (state) => {
+  const props = {
+    balance: state.wallet.balance,
+    numTransactions: state.wallet.numTransactions,
+    lastTransactionDate: state.wallet.lastTransactionDate,
+    isFetching: state.wallet.isFetching,
+    rateUpdateDate: state.wallet.rateUpdateDate,
+    rates: state.wallet.rates,
+  };
+  return props;
+};
 
-}
-
-export default Home;
+export default connect(mapStateToProps)(Home);

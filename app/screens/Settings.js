@@ -1,15 +1,28 @@
 import React, { Component } from 'react';
-import { Text, View, StatusBar } from 'react-native';
+import { ScrollView, StatusBar, View, Text } from 'react-native';
+
+import { Container } from '../components/Container';
+import { Panel } from '../components/Panel';
 
 class Settings extends Component {
   render() {
     return (
-      <View>
-        <StatusBar translucent={false} barStyle="default"/>
-        <View style={{ padding: 30, alignItems: 'center' }}>
-          <Text>Demo Settings page</Text>
-        </View>
-      </View>
+      <Container>
+        <StatusBar transcucent={false} barStyle="default" />
+        <ScrollView style={{ flex: 1, paddingTop: 10, flexDirection: 'column' }}>
+          <View style={{ justifyContent: 'center', flexDirection: 'column' }}>
+            <Panel type="home" onPress={this.handleSendPress} mainText="Send" subText="Select to send" />
+            <Panel type="home" onPress={this.handleReceivePress} mainText="Receive" subText="Select to receive" />
+            <Panel type="home" onPress={this.handleTransactionsPress} mainText="Transactions" subText="View your transactions" />
+            <Panel type="home" onPress={this.handleSettingsPress} mainText="Settings" subText="Change settings" />
+            <Text style={{ padding: 25, color: '#FFF', fontWeight: '200' }}>
+              This application and its content is copyright of BUSINESS - © BUSINESS 2018.
+              {'\n'}
+              All rights reserved.
+            </Text>
+          </View>
+        </ScrollView>
+      </Container>
     );
   }
 }

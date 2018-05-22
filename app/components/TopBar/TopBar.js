@@ -3,9 +3,8 @@ import { View } from 'react-native';
 
 import styles from './styles';
 
-const TopBar = ({ onPress, headerText}) => (
-  <View style={styles.container}>
-  </View>
+const TopBar = () => (
+  <View style={styles.container} />
 );
 
 export default TopBar;

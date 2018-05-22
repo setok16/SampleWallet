@@ -4,7 +4,7 @@ import { ifIphoneX } from 'react-native-iphone-x-helper';
 
 const styles = EstyleSheet.create({
   container: {
-    //flex: 1,
+    // flex: 1,
     '@media ios': {
       height: 20,
       ...ifIphoneX({

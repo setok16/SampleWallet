@@ -1,18 +1,17 @@
 
 import EstyleSheet from 'react-native-extended-stylesheet';
-import { StatusBar } from 'react-native';
 
 const styles = EstyleSheet.create({
   container: {
-    backgroundColor: '$gray',
+    backgroundColor: '$darkGray',
     alignItems: 'center',
-    //flex: 1,
+    // flex: 1,
     flexDirection: 'row',
     left: 0,
     right: 0,
     top: 0,
     bottom: 0,
-    height: 100,
+    height: 70,
     /*
     // TopBar component takes care of status bar difference
     // and colors the status bar black.
@@ -21,18 +20,18 @@ const styles = EstyleSheet.create({
     },
     '@media android': {
       paddingTop: StatusBar.currentHeight, // Android specific
-    },*/
+    }, */
   },
   button: {
-    //position: 'absolute',
-    //alignSelf: 'flex-start',
+    // position: 'absolute',
+    // alignSelf: 'flex-start',
     flex: 0.15,
   },
   menu: {
     margin: 20,
     width: 30,
     height: 25,
-    tintColor: '$lightGray',
+    tintColor: '$white',
   },
   text: {
     flex: 0.85,
@@ -40,7 +39,7 @@ const styles = EstyleSheet.create({
     fontSize: 20,
     margin: 20,
     marginTop: 20,
-    color: '$lightGray',
+    color: '$white',
     alignSelf: 'center',
   },
 });

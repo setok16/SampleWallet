@@ -1,5 +1,19 @@
 {
   "expo": {
-    "sdkVersion": "26.0.0"
+    "name": "Sample Wallet",
+    "description": "N/A",
+    "slug": "sample-wallet",
+    "privacy": "public",
+    "version": "0.0.1",
+    "sdkVersion": "26.0.0",
+    "ios": {
+      "bundleIdentifier": "com.kotaroseto.samplewallet",
+      "supportsTablet": true,
+      "buildNumber": "0"
+    },
+    "android": {
+      "package": "com.kotaroseto.samplewallet",
+      "versionCode" : 0
+    }
   }
 }

@@ -1,7 +1,6 @@
-import { Dimensions } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-//const imageWidth = Dimensions.get('window').width / 2;
+// const imageWidth = Dimensions.get('window').width / 2;
 
 export default EStyleSheet.create({
   wrapper: {
@@ -10,15 +9,19 @@ export default EStyleSheet.create({
     paddingRight: 20,
     height: 70,
     marginTop: 10,
-    //flex: 1,
   },
   container: {
     backgroundColor: '$darkGray',
     marginBottom: 10,
     borderRadius: 10,
     alignSelf: 'stretch',
-    //height: 70,
     height: 65,
+    borderWidth: 1,
+    borderColor: '$border',
+  },
+  disabledContainer: {
+    backgroundColor: '$nonPressableGray',
+    borderColor: '$darkGray',
   },
   subContainer: {
     paddingTop: 10,
@@ -26,7 +29,6 @@ export default EStyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     flexDirection: 'row',
-    //justifyContent: 'center', // Can also be 'center'
   },
   icon: {
     height: null,
@@ -37,8 +39,13 @@ export default EStyleSheet.create({
   textContainer: {
     flex: 1,
     paddingLeft: 20,
+    flexDirection: 'column',
+  },
+  upperContainer: {
+    flexDirection: 'row',
   },
   mainText: {
+    flex: 0.6,
     color: '$white',
     fontWeight: '200',
     fontSize: 20,
@@ -47,5 +54,12 @@ export default EStyleSheet.create({
     color: '$white',
     fontWeight: '200',
     fontSize: 15,
+  },
+  upperText: {
+    flex: 0.4,
+    alignSelf: 'center',
+    color: '$white',
+    fontWeight: '200',
+    fontSize: 10,
   },
 });

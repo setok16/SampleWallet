@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, StatusBar, ScrollView } from 'react-native';
-import { DrawerNavigator } from 'react-navigation';
+import { Text, StatusBar, ScrollView } from 'react-native';
 
 import { Container } from '../components/Container';
 import { Header } from '../components/Header';
 import { TopBar } from '../components/TopBar';
 
 class MenuItem1 extends Component {
-
+  static propTypes = {
+    navigation: PropTypes.array,
+  }
   handleMenuPress = () => {
-    //TODO The side menu will create an error on press
     console.log('Menu Pressed');
     this.props.navigation.navigate('DrawerOpen');
   }
@@ -18,9 +18,14 @@ class MenuItem1 extends Component {
   render() {
     return (
       <Container>
+        <TopBar />
         <StatusBar translucent={false} barStyle="light-content" />
-        <Header onPress={this.handleMenuPress} headerText='MENU ITEM 1'/>
-        <ScrollView style={{position:'absolute', top:100, bottom:-100, paddingTop: 20}}>
+        <Header onPress={this.handleMenuPress} headerText="MENU ITEM 1" />
+        <ScrollView
+          style={{
+            position: 'absolute', top: 100, bottom: -100, paddingTop: 20,
+          }}
+        >
           <Text>Demo Menu Item page</Text>
         </ScrollView>
       </Container>
