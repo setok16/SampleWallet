@@ -14,6 +14,7 @@ import {
   calculateNumTransactions,
   getLastTransactionDate,
   getInitialConversion,
+  getBalance,
 } from '../actions/wallet';
 
 class Home extends Component {
@@ -33,6 +34,7 @@ class Home extends Component {
     this.props.dispatch(calculateBalance());
     this.props.dispatch(calculateNumTransactions());
     this.props.dispatch(getLastTransactionDate());
+    this.props.dispatch(getBalance('5afeaf28ad2ee36685f5c932'));
   }
 
   handleWalletPress = () => {
@@ -105,6 +107,7 @@ const mapStateToProps = (state) => {
     isFetching: state.wallet.isFetching,
     rateUpdateDate: state.wallet.rateUpdateDate,
     rates: state.wallet.rates,
+    walletId: state.wallet.walletId,
   };
   return props;
 };

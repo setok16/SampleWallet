@@ -2,6 +2,8 @@ import Moment from 'moment';
 
 import {
   CALCULATE_BALANCE,
+  GET_BALANCE,
+  BALANCE_LOADED,
   CALCULATE_NUM_TRANSACTIONS,
   GET_LAST_TRANSACTION_DATE,
   DECREMENT_BALANCE,
@@ -67,6 +69,16 @@ const reducer = (state = initialState, action) => {
         rates: action.result,
       };
     case CONVERSION_ERROR:
+    case GET_BALANCE:
+      return {
+        ...state,
+        walletId: action.walletId,
+      };
+    case BALANCE_LOADED:
+      return {
+        ...state,
+        balance: action.balance,
+      };
     default:
       return state;
   }

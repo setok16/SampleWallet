@@ -1,5 +1,11 @@
 import { takeEvery, call, put } from 'redux-saga/effects'; // Allow us to listen to any actions we want to and call a function upon fireing
-import { GET_INITIAL_CONVERSION, CONVERSION_RESULT, CONVERSION_ERROR } from '../actions/wallet';
+import {
+  GET_INITIAL_CONVERSION,
+  CONVERSION_RESULT,
+  CONVERSION_ERROR,
+  GET_BALANCE,
+  BALANCE_LOADED,
+} from '../actions/wallet';
 
 // 1. Upon inital app load
 
@@ -22,8 +28,23 @@ function* fetchLatestExchangeRate() {
   }
 }
 
+const getBalance = walletId => fetch(`http://localhost:3000/wallets/${walletId}`);
+
+function* fetchBalance(action) {
+  try {
+    const { walletId } = action;
+    const response = yield call(getBalance, walletId);
+    const result = yield response.json();
+    const balance = yield Number(JSON.stringify(result.balance));
+    yield put({ type: BALANCE_LOADED, balance });
+  } catch (e) {
+    console.log('Saga Error: ', e);
+  }
+}
+
 export default function* rootSaga() {
   yield takeEvery(GET_INITIAL_CONVERSION, fetchLatestExchangeRate);
+  yield takeEvery(GET_BALANCE, fetchBalance);
   // This appends the action of 'GET_EXCHANGE_RATE' to the final
   // argument of fetchLatestExchangeRate
 

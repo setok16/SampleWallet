@@ -1,4 +1,6 @@
 export const CALCULATE_BALANCE = 'CALCULATE_BALANCE';
+export const GET_BALANCE = 'GET_BALANCE';
+export const BALANCE_LOADED = 'BALANCE_LOADED';
 export const CALCULATE_NUM_TRANSACTIONS = 'CALCULATE_NUM_TRANSACTIONS';
 export const GET_LAST_TRANSACTION_DATE = 'GET_LAST_TRANSACTION_DATE';
 export const GET_NEW_ADDRESS = 'GET_NEW_ADDRESS';
@@ -10,6 +12,16 @@ export const CONVERSION_ERROR = 'CONVERSION_ERROR';
 
 export const calculateBalance = () => ({
   type: CALCULATE_BALANCE,
+});
+
+export const getBalance = walletId => ({
+  type: GET_BALANCE,
+  walletId,
+});
+
+export const balanceLoaded = walletId => ({
+  type: BALANCE_LOADED,
+  walletId,
 });
 
 export const calculateNumTransactions = () => ({
